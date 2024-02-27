@@ -6,7 +6,7 @@ CREATE TABLE School (
 CREATE TABLE Field (
     fieldID INT PRIMARY KEY NOT NULL,
     guild_name VARCHAR(50),
-    name VARCHAR(50)
+    field_name VARCHAR(50)
 );
 
 CREATE TABLE Student (
@@ -45,4 +45,21 @@ CREATE TABLE Professor (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+
+CREATE TABLE Course (
+    courseID INT PRIMARY KEY NOT NULL,
+    course_name VARCHAR(50),
+    max_students int,
+    schoolID_FK INT,
+        FOREIGN KEY (schoolID_FK)
+        REFERENCES School (SchoolID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    courseID_FK INT,
+        FOREIGN KEY (courseID_FK)
+        REFERENCES Course (courseID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+)
 
