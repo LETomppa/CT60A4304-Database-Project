@@ -9,6 +9,23 @@ CREATE TABLE Field (
     field_name VARCHAR(50)
 );
 
+CREATE TABLE Course (
+    courseID INT PRIMARY KEY NOT NULL,
+    course_name VARCHAR(50),
+    max_students int,
+    schoolID_FK INT,
+    studentID_FK INT,
+        FOREIGN KEY (schoolID_FK)
+        REFERENCES School (SchoolID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+        
+        FOREIGN KEY (studentID_FK)
+        REFERENCES Student (StudentID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
 CREATE TABLE Student (
     studentID INT PRIMARY KEY NOT NULL,
     email VARCHAR(50),
@@ -16,16 +33,18 @@ CREATE TABLE Student (
     last_name VARCHAR(50),
     birthday VARCHAR(20),
     courseID_FK INT,
+    schoolID_FK INT,
+    fieldID_FK INT,
         FOREIGN KEY (courseID_FK)
         REFERENCES Course (courseID)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    fieldID_FK INT,
+
         FOREIGN KEY (fieldID_FK)
         REFERENCES Field (fieldID)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    schoolID_FK INT,
+
         FOREIGN KEY (schoolID_FK)
         REFERENCES School (SchoolID)
         ON DELETE CASCADE
@@ -45,23 +64,6 @@ CREATE TABLE Professor (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
-
-
-CREATE TABLE Course (
-    courseID INT PRIMARY KEY NOT NULL,
-    course_name VARCHAR(50),
-    max_students int,
-    schoolID_FK INT,
-        FOREIGN KEY (schoolID_FK)
-        REFERENCES School (SchoolID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    courseID_FK INT,
-        FOREIGN KEY (courseID_FK)
-        REFERENCES Course (courseID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-)
 
 CREATE TABLE Events (
     event_name VARCHAR(50),
