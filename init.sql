@@ -16,14 +16,14 @@ CREATE TABLE Course (
     schoolID_FK INT,
     studentID_FK INT,
         FOREIGN KEY (schoolID_FK)
-        REFERENCES School (SchoolID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+            REFERENCES School (SchoolID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
         
         FOREIGN KEY (studentID_FK)
-        REFERENCES Student (StudentID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+            REFERENCES Student (StudentID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
 
 CREATE TABLE Student (
@@ -36,19 +36,33 @@ CREATE TABLE Student (
     schoolID_FK INT,
     fieldID_FK INT,
         FOREIGN KEY (courseID_FK)
-        REFERENCES Course (courseID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+            REFERENCES Course (courseID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
 
         FOREIGN KEY (fieldID_FK)
-        REFERENCES Field (fieldID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+            REFERENCES Field (fieldID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
 
         FOREIGN KEY (schoolID_FK)
-        REFERENCES School (SchoolID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+            REFERENCES School (SchoolID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+);
+
+CREATE TABLE StudentsInCourses ( --Helpottaa mukavasti tota manytomany linkkaamista , n:m
+    courseID_FK INT,
+    studentID_FK,
+        FOREIGN KEY (courseID_FK)
+            REFERENCES Course (courseID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+
+        FOREIGN KEY (studentID_FK)
+            REFERENCES Student (studentID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
 
 CREATE TABLE Professor (
@@ -60,16 +74,16 @@ CREATE TABLE Professor (
     birthday VARCHAR(20),
     courseID_FK INT,
         FOREIGN KEY (courseID_FK)
-        REFERENCES Course (courseID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+            REFERENCES Course (courseID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
 
 CREATE TABLE Events (
     event_name VARCHAR(50),
     fieldID_FK INT,
         FOREIGN KEY (fieldID_FK)
-        REFERENCES Field (fieldID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+            REFERENCES Field (fieldID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
