@@ -63,3 +63,11 @@ CREATE TABLE Course (
         ON UPDATE CASCADE
 )
 
+CREATE TABLE Events (
+    event_name VARCHAR(50),
+    fieldID_FK INT,
+        FOREIGN KEY (fieldID_FK)
+        REFERENCES Field (fieldID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
