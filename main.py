@@ -20,8 +20,8 @@ def initializeDB():
         for line in f.readlines():
             initcommandstring+=line
         cur.executescript(initcommandstring)
-    except sqlite3.Error:
-        print("Error")
+    except sqlite3.Error as er:
+        print(f"Error during additional initialization: {er.args}")
 
 
 

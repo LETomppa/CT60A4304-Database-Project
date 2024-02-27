@@ -1,12 +1,12 @@
 CREATE TABLE School (
     schoolID INT PRIMARY KEY NOT NULL,
-    school_name VARCHAR(50),
+    school_name VARCHAR(50)
 );
 
 CREATE TABLE Field (
     fieldID INT PRIMARY KEY NOT NULL,
     guild_name VARCHAR(50),
-    name VARCHAR(50),
+    name VARCHAR(50)
 );
 
 CREATE TABLE Student (
@@ -19,5 +19,5 @@ CREATE TABLE Student (
     schoolID INT NOT NULL,
     fieldID INT NOT NULL,
     FOREIGN KEY (schoolID) REFERENCES School(schoolID) ON DELETE CASCADE,
-    FOREIGN KEY (fieldID) REFERENCES Field(fieldID) ON DELETE CASCADE,
+    FOREIGN KEY (fieldID) REFERENCES Field(fieldID) ON DELETE CASCADE
 );
