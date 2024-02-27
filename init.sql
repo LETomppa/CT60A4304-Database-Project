@@ -1,4 +1,5 @@
 CREATE TABLE School (
+    schoolID INT PRIMARY KEY NOT NULL,
     school_name VARCHAR(50),
 );
 
