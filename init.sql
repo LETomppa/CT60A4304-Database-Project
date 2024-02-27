@@ -87,3 +87,5 @@ CREATE TABLE Events (
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
+
+--TESTI
