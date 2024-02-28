@@ -29,12 +29,20 @@ def fieldStudents():
     for i in SQLlist:
         print(str(i[0]) + ", " + i[1] + ", " + i[2])
     print( )
-    SQLlist.clear()
-    whatField = input("What fields students do you want to see? ")
-    cur.execute("SELECT * FROM Student WHERE Student.fieldID_FK=?;", (whatField,))
-    SQLlist = cur.fetchall()
-    for i in SQLlist:
-        print(str(i[2]) + ", " + i[3] + ", " + i[1] + ", " + i[4])
+    fieldID = input("Enter the ID of the field: ")
+    field_exists = False
+    for field in SQLlist:
+        if int(field[0]) == int(fieldID):
+            field_exists = True
+            break
+    if field_exists:
+        SQLlist.clear()
+        cur.execute("SELECT * FROM Student WHERE Student.fieldID_FK=?;", (fieldID,))
+        SQLlist = cur.fetchall()
+        for i in SQLlist:
+            print(str(i[2]) + ", " + i[3] + ", " + i[1] + ", " + i[4])
+    else:
+        print("Field not found.")
     return
 
 def studentCourses():
@@ -43,19 +51,27 @@ def studentCourses():
     for i in SQLlist:
         print(str(i[0]) + ", " + i[2] + " " + i[3])
     print( )
-    SQLlist.clear()
-    whatStudent = input("Whos courses do you want to see? ")
-    cur.execute("""SELECT S.first_name || ' ' ||  S.last_name AS "'Student'", 
-                C.course_name AS "'Course'" 
-                    FROM Student S 
-                    JOIN CourseInformation CI ON S.studentID = CI.studentID_FK
-                    JOIN Course C ON CI.courseID_FK = C.courseID 
-                    WHERE S.studentID=? """, (whatStudent,))
-    SQLlist = cur.fetchall()
-    print( )
-    print(SQLlist[0][0]+":")
-    for i in SQLlist:
-        print(i[1])
+    studentID = input("Enter the ID of the student: ")
+    student_exists = False
+    for student in SQLlist:
+        if int(student[0]) == int(studentID):
+            student_exists = True
+            break
+    if student_exists:
+        SQLlist.clear()
+        cur.execute("""SELECT S.first_name || ' ' ||  S.last_name AS "'Student'", 
+                    C.course_name AS "'Course'" 
+                        FROM Student S 
+                        JOIN CourseInformation CI ON S.studentID = CI.studentID_FK
+                        JOIN Course C ON CI.courseID_FK = C.courseID 
+                        WHERE S.studentID=? """, (studentID,))
+        SQLlist = cur.fetchall()
+        print( )
+        print(SQLlist[0][0]+":")
+        for i in SQLlist:
+            print(i[1])
+    else:
+        print("Student not found.")
     return
 
 def courseInformation():
@@ -64,29 +80,36 @@ def courseInformation():
     for i in SQLlist:
         print(str(i[0]) + ", " + i[1])
     print( )
-    SQLlist.clear()
-    whatCourse = input("Which courses information do you want to see? ")
-    print()
-    cur.execute("""
-    SELECT
-        C.course_name AS 'Course',
-        S.first_name || ' ' ||  S.last_name AS 'Student',
-        P.first_name || ' ' ||  P.last_name AS 'Professor'
-            FROM Course C
-            JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
-            JOIN Student S ON S.studentID = CI.studentID_FK
-            LEFT JOIN Professor P ON P.staffID = CI.staffID_FK
-            WHERE C.courseID =?""", (whatCourse,))
-    SQLlist = cur.fetchall()
-    print("Course:")
-    print(SQLlist[0][0])
-    print()
-    print("Professor:")
-    print(SQLlist[0][2])
-    print()
-    print("Students:")
-    for i in SQLlist:
-        print(str(i[1]))
+    courseID = input("Enter the ID of the course: ")
+    course_exists = False
+    for course in SQLlist:
+        if int(course[0]) == int(courseID):
+            course_exists = True
+            break
+    if course_exists:
+        SQLlist.clear()
+        cur.execute("""
+        SELECT
+            C.course_name AS 'Course',
+            S.first_name || ' ' ||  S.last_name AS 'Student',
+            P.first_name || ' ' ||  P.last_name AS 'Professor'
+                FROM Course C
+                JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
+                JOIN Student S ON S.studentID = CI.studentID_FK
+                LEFT JOIN Professor P ON P.staffID = CI.staffID_FK
+                WHERE C.courseID =?""", (courseID,))
+        SQLlist = cur.fetchall()
+        print("Course:")
+        print(SQLlist[0][0])
+        print()
+        print("Professor:")
+        print(SQLlist[0][2])
+        print()
+        print("Students:")
+        for i in SQLlist:
+            print(str(i[1]))
+    else:
+        print("Course not found.")
     return
 
 def professorCourses():
@@ -95,19 +118,27 @@ def professorCourses():
     for i in SQLlist:
         print(str(i[0]) + ", " + i[3] + " " + i[4])
     print( )
-    SQLlist.clear()
-    whatProfessor = input("Which professor? ")
-    cur.execute("""SELECT P.first_name || ' ' ||  P.last_name AS 'Professor', 
-                C.course_name AS 'Course' 
-                    FROM Professor P 
-                    JOIN CourseInformation CI ON P.staffID = CI.staffID_FK
-                    JOIN Course C ON CI.courseID_FK = C.courseID 
-                    WHERE P.staffID=?""", (whatProfessor,))
-    SQLlist = cur.fetchall()
-    print( )
-    print(SQLlist[0][0]+":")
-    for i in SQLlist:
-        print(i[1])
+    professorID = input("Enter the ID of the professor: ")
+    professor_exists = False
+    for professor in SQLlist:
+        if int(professor[0]) == int(professorID):
+            professor_exists = True
+            break
+    if professor_exists:
+        SQLlist.clear()
+        cur.execute("""SELECT P.first_name || ' ' ||  P.last_name AS 'Professor', 
+                    C.course_name AS 'Course' 
+                        FROM Professor P 
+                        JOIN CourseInformation CI ON P.staffID = CI.staffID_FK
+                        JOIN Course C ON CI.courseID_FK = C.courseID 
+                        WHERE P.staffID=?""", (professorID,))
+        SQLlist = cur.fetchall()
+        print( )
+        print(SQLlist[0][0]+":")
+        for i in SQLlist:
+            print(i[1])
+    else:
+        print("Professor not found.")
     return
 
 def fieldEvents():
@@ -115,17 +146,24 @@ def fieldEvents():
     SQLlist = cur.fetchall()
     for i in SQLlist:
         print(str(i[0]) + ", " + i[1] + " " + i[2])
-    print( )
-    SQLlist.clear()
-    whatField = input("Enter the ID of the field which events you want to list? ")
-    cur.execute("""SELECT E.event_name AS 'Event'  
-                    FROM Events E
-                    WHERE E.fieldID_FK=?""", (whatField,))
-    SQLlist = cur.fetchall()
-    print( )
-    print("Events:")
-    for i in SQLlist:
-        print(i[0])
+    print()
+    fieldID = input("Enter the ID of the field: ")
+    field_exists = False
+    for field in SQLlist:
+        if int(field[0]) == int(fieldID):
+            field_exists = True
+            break
+    if field_exists:
+        SQLlist.clear()
+        cur.execute("""SELECT E.event_name AS 'Event',  
+                        FROM Events E
+                        WHERE E.fieldID_FK=?""", (fieldID,))
+        SQLlist = cur.fetchall()
+        print( )
+        for i in SQLlist:
+            print(i[1])
+    else:
+        print("Field not found.")
     return
 
 def addCourse():
@@ -133,10 +171,35 @@ def addCourse():
     cur.execute("SELECT * FROM Course;")
     existingIDs = cur.fetchall()
     for id in existingIDs:
-        course_id = id[0]
+        course_id = int(id[0])
     course_id += 1
-    cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);", (course_id, course_name,))
-    print("Course " + course_name + " added.")
+    cur.execute("SELECT * FROM Professor")
+    professors = cur.fetchall()
+    for professor in professors:
+        print(professor[0] + ", " + professor[3] + " " + professor[4])
+    professorID = input("Enter the ID of the professor you want to assign to the course: ")
+    professor_found = False
+    for professor in professors:
+        if int(professor[0]) == int(professorID):
+            professor_found = True
+    print()
+    cur.execute("SELECT * FROM Student")
+    students = cur.fetchall()
+    for student in students:
+        print(student[0] + ", " + student[2] + " " + student[3])
+    studentID = input("Enter the ID of the student you want to add to the course: ")
+    student_found = False
+    for student in students:
+        if int(student[0]) == int(studentID):
+            student_found = True
+    if student_found and professor_found:
+        cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);", (course_id, course_name,))
+        print("Course " + course_name + " added.")
+        cur.execute("INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES (?, ?, ?);", (course_id, studentID, professorID,))
+        print()
+        print("Data inserted.")
+    else:
+        print("Student or professor not found. Course not added.")
 
 def modifyCourse():
     cur.execute("SELECT * FROM Course;")
@@ -144,10 +207,10 @@ def modifyCourse():
     for course in courses:
         print(str(course[0]) + ", " + course[1])
     print()
-    courseID = input("Enter ID of the course you want to modify: ")
+    courseID = input("Enter ID of the course: ")
     course_exists = False
     for course in courses:
-        if course[0] == int(courseID):
+        if int(course[0]) == int(courseID):
             course_exists = True
             break
     if course_exists:
@@ -163,10 +226,10 @@ def deleteCourse():
     for course in courses:
         print(str(course[0]) + ", " + course[1])
     print()
-    courseID = input("Enter ID of the course you want to delete: ")
+    courseID = input("Enter ID of the course: ")
     course_exists = False
     for course in courses:
-        if course[0] == int(courseID):
+        if int(course[0]) == int(courseID):
             course_exists = True
             break
     if course_exists:
