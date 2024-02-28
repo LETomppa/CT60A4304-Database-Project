@@ -25,24 +25,61 @@ def initializeDB():
 
 def fieldStudents():
     cur.execute("SELECT * FROM Field;")
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(str(i[0]) + ", " + i[1] + ", " + i[2])
+    print( )
+    SQLlist.clear()
     whatField = input("What fields students do you want to see? ")
     cur.execute("SELECT * FROM Student WHERE Student.fieldID_FK=?;", (whatField,))
     SQLlist = cur.fetchall()
     for i in SQLlist:
-        print(i)
+        print(str(i[2]) + ", " + i[3] + ", " + i[1] + ", " + i[4])
     return
 
 def studentCourses():
     cur.execute("SELECT * FROM Student;")
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(str(i[0]) + ", " + i[2] + " " + i[3])
+    print( )
+    SQLlist.clear()
     whatStudent = input("Whos courses do you want to see? ")
     cur.execute("""SELECT S.first_name || ' ' ||  S.last_name AS "'Student'", 
                 GROUP_CONCAT(C.course_name, " ") AS "'Course'" 
                     FROM Student S 
-                    JOIN Course C ON S.courseID_FK = C.courseID 
+                    JOIN CourseInformation CI ON S.studentID = CI.studentID_FK
+                    JOIN Course C ON CI.courseID_FK = C.courseID 
                     WHERE S.studentID=? GROUP BY 'Student'""", (whatStudent,))
+    SQLlist = cur.fetchall()
+    print( )
+    print(SQLlist[0][0]+":")
+    for i in SQLlist:
+        print(i[1])
+    return
+
+def courseInformation():
+    cur.execute("SELECT * FROM Course;")
     SQLlist = cur.fetchall()
     for i in SQLlist:
         print(i)
+    print( )
+    SQLlist.clear()
+    whatCourse = input("Which courses information do you want to see?")
+    cur.execute("""
+    SELECT
+        C.course_name AS 'Course',
+        GROUP_CONCAT(S.first_name || ' ' ||  S.last_name, ', ') AS 'Student',
+        P.first_name || ' ' ||  P.last_name AS 'Professor'
+            FROM Course C
+            JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
+            JOIN Student S ON S.studentID = CI.studentID_FK
+            JOIN Professor P ON P.staffID = CI.staffID_FK
+            WHERE C.courseID =?
+            GROUP BY 'C.course_name'""", (whatCourse,))
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(str(i[0]) + ", " + i[1] + "," + i[2])
     return
 
 def addCourse():
@@ -91,25 +128,6 @@ def deleteCourse():
         print("Course deleted.")
     else:
         print("Course not found.")
-        
-def courseInformation():
-    cur.execute("SELECT * FROM Course;")
-    whatCourse = input("Which courses information do you want to see?")
-    cur.execute("""
-    SELECT
-        C.course_name AS 'Course',
-        GROUP_CONCAT(S.first_name || ' ' ||  S.last_name, ' ') AS 'Student',
-        GROUP_CONCAT(P.first_name || ' ' ||  P.last_name, ' ') AS 'Professor'
-            FROM Course C
-            JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
-            JOIN Student S ON S.courseID_FK = CI.courseID_FK
-            JOIN Professor P ON P.courseID_FK = CI.courseID_FK
-            WHERE C.courseID =?
-            GROUP BY 'C.course_name'""", (whatCourse,))
-    SQLlist = cur.fetchall()
-    for i in SQLlist:
-        print(i)
-    return
 
 def main():
     initializeDB()
