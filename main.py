@@ -34,12 +34,36 @@ def fieldStudents():
 
 def studentCourses():
     cur.execute("SELECT * FROM Student;")
-    whatStudent = input("Whos courses do you want to see?")
-    cur.execute("SELECT * FROM  WHERE")
+    whatStudent = input("Whos courses do you want to see? ")
+    cur.execute("""SELECT S.first_name || ' ' ||  S.last_name AS "'Student'", 
+                GROUP_CONCAT(C.course_name, " ") AS "'Course'" 
+                    FROM Student S 
+                    JOIN Course C ON S.courseID_FK = C.courseID 
+                    WHERE S.studentID=? GROUP BY 'Student'""", (whatStudent,))
     SQLlist = cur.fetchall()
     for i in SQLlist:
         print(i)
     return
+
+def courseInformation():
+    cur.execute("SELECT * FROM Course;")
+    whatCourse = input("Which courses information do you want to see?")
+    cur.execute("""
+    SELECT
+        C.course_name AS 'Course',
+        GROUP_CONCAT(S.first_name || ' ' ||  S.last_name, ' ') AS 'Student',
+        GROUP_CONCAT(P.first_name || ' ' ||  P.last_name, ' ') AS 'Professor'
+            FROM Course C
+            JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
+            JOIN Student S ON S.courseID_FK = CI.courseID_FK
+            JOIN Professor P ON P.courseID_FK = CI.courseID_FK
+            WHERE C.courseID =?
+            GROUP BY 'C.course_name'""", (whatCourse,))
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(i)
+    return
+
 
 def main():
     initializeDB()
@@ -47,8 +71,8 @@ def main():
     while(userInput != "0"):
         print("\nMenu options:")
         print("1: Print fields students")
-        print("2: Print students courses") # TÄÄ ON 2XJOIN ELI NÄYTTÄÄ KURSSIN OPETTAJAN
-        print("3: Print courses students")
+        print("2: Print students courses")
+        print("3: Print course information") #TÄÄ ON SE JOINX2
         print("4: Print courses that a professor teaches")
         print("5: Print fields events")
         print("x: Search for one player")
@@ -62,7 +86,7 @@ def main():
         if userInput == "2":
             studentCourses()
         if userInput == "3":
-            pass
+            courseInformation()
         if userInput == "4":
             pass
         if userInput == "5":
