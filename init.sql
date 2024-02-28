@@ -109,16 +109,16 @@ insert into Student (studentID, email, first_name, last_name, birthday) values (
 insert into Student (studentID, email, first_name, last_name, birthday) values ('002029', 'iseebrightn@tripadvisor.com', 'Inga', 'Seebright', '1975-03-10');
 insert into Student (studentID, email, first_name, last_name, birthday) values ('001898', 'maleksico@foxnews.com', 'Micheil', 'Aleksic', '1999-09-05');
 
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('019068', 3585926932, 'fberthomier0@tiny.cc', 'Fayth', 'Berthomier', '1/6/1965');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('010145', 3588363311, 'dblazey1@discovery.com', 'Diandra', 'Blazey', '3/30/1970');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012816', 3581892243, 'hraffeorty2@clickbank.net', 'Herta', 'Raffeorty', '4/4/1974');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012346', 3582432141, 'mzarfati3@wp.com', 'Mohandas', 'Zarfati', '3/14/1985');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('016597', 3589964033, 'dcardinale4@meetup.com', 'Dawn', 'Cardinale', '8/30/1973');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012796', 3583653186, 'nhaylett5@weibo.com', 'Norah', 'Haylett', '8/10/1979');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012834', 3588356281, 'ggewer6@businessweek.com', 'Garwin', 'Gewer', '4/1/1970');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('017126', 3587000983, 'hvarnals7@oracle.com', 'Hamid', 'Varnals', '12/18/1964');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012428', 3584715697, 'smicheau8@aol.com', 'Sissie', 'Micheau', '6/7/1966');
-insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('018326', 3584768579, 'csimko9@imdb.com', 'Caitrin', 'Simko', '3/24/1966');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('019068', '3585926932', 'fberthomier0@tiny.cc', 'Fayth', 'Berthomier', '1/6/1965');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('010145', '3588363311', 'dblazey1@discovery.com', 'Diandra', 'Blazey', '3/30/1970');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012816', '3581892243', 'hraffeorty2@clickbank.net', 'Herta', 'Raffeorty', '4/4/1974');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012346', '3582432141', 'mzarfati3@wp.com', 'Mohandas', 'Zarfati', '3/14/1985');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('016597', '3589964033', 'dcardinale4@meetup.com', 'Dawn', 'Cardinale', '8/30/1973');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012796', '3583653186', 'nhaylett5@weibo.com', 'Norah', 'Haylett', '8/10/1979');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012834', '3588356281', 'ggewer6@businessweek.com', 'Garwin', 'Gewer', '4/1/1970');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('017126', '3587000983', 'hvarnals7@oracle.com', 'Hamid', 'Varnals', '12/18/1964');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012428', '3584715697', 'smicheau8@aol.com', 'Sissie', 'Micheau', '6/7/1966');
+insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('018326', '3584768579', 'csimko9@imdb.com', 'Caitrin', 'Simko', '3/24/1966');
 
 insert into Field (fieldID, guild_name, field_name) values ('028466', 'Aether', 'International Programs');
 insert into Field (fieldID, guild_name, field_name) values ('022577', 'Armatuuri', 'Energy Technology');
