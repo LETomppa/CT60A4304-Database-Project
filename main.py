@@ -118,13 +118,14 @@ def fieldEvents():
     print( )
     SQLlist.clear()
     whatField = input("Enter the ID of the field which events you want to list? ")
-    cur.execute("""SELECT E.event_name AS 'Event',  
+    cur.execute("""SELECT E.event_name AS 'Event'  
                     FROM Events E
                     WHERE E.fieldID_FK=?""", (whatField,))
     SQLlist = cur.fetchall()
     print( )
+    print("Events:")
     for i in SQLlist:
-        print(i[1])
+        print(i[0])
     return
 
 def addCourse():
