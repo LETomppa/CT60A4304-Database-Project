@@ -89,3 +89,4 @@ CREATE TABLE Events (
 );
 
 --TESTI
+INSERT INTO Student (StudentID, email, first_name, last_name, birthday) VALUES (1, "testiukko@testi.com", "matti", "meikäläinen", "21.12.2001");

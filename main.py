@@ -30,7 +30,7 @@ def main():
     userInput = -1
     while(userInput != "0"):
         print("\nMenu options:")
-        print("1: Print Players")
+        print("1: Print Students")
         print("2: Print Ranking")
         print("3: Print Matches")
         print("4: Search for one player")
@@ -40,7 +40,10 @@ def main():
         userInput = input("What do you want to do? ")
         print(userInput)
         if userInput == "1":
-            pass
+            cur.execute("SELECT * FROM Student")
+            result = cur.fetchall()
+            for student in result:
+                print(student)
         if userInput == "2":
             pass
         if userInput == "3":
