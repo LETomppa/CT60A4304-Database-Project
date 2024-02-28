@@ -23,26 +23,44 @@ def initializeDB():
     except sqlite3.Error as er:
         print(f"Error during additional initialization: {er.args}")
 
+def fieldStudents():
+    cur.execute("SELECT * FROM Field;")
+    whatField = input("What fields students do you want to see? ")
+    cur.execute("SELECT * FROM Student WHERE Student.fieldID_FK=?;", (whatField,))
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(i)
+    return
 
+def studentCourses():
+    cur.execute("SELECT * FROM Student;")
+    whatStudent = input("Whos courses do you want to see?")
+    cur.execute("SELECT * FROM  WHERE")
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(i)
+    return
 
 def main():
     initializeDB()
     userInput = -1
     while(userInput != "0"):
         print("\nMenu options:")
-        print("1: Print Players")
-        print("2: Print Ranking")
-        print("3: Print Matches")
-        print("4: Search for one player")
-        print("5: Move matchdate")
-        print("6: Delete player")
+        print("1: Print fields students")
+        print("2: Print students courses") # TÄÄ ON 2XJOIN ELI NÄYTTÄÄ KURSSIN OPETTAJAN
+        print("3: Print courses students")
+        print("4: Print courses that a professor teaches")
+        print("5: Print fields events")
+        print("x: Search for one player")
+        print("x: Move matchdate")
+        print("x: Delete player")
         print("0: Quit")
         userInput = input("What do you want to do? ")
         print(userInput)
         if userInput == "1":
-            pass
+            fieldStudents()
         if userInput == "2":
-            pass
+            studentCourses()
         if userInput == "3":
             pass
         if userInput == "4":

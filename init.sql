@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE School (
-    schoolID INT PRIMARY KEY NOT NULL,
+    schoolID INT PRIMARY KEY NOT NULL UNIQUE,
     school_name VARCHAR(50)
 );
 
@@ -12,9 +12,9 @@ CREATE TABLE Field (
 );
 
 CREATE TABLE Course (
-    courseID INT PRIMARY KEY NOT NULL,
+    courseID INT PRIMARY KEY,
     course_name VARCHAR(50),
-    max_students int,
+    max_students int DEFAULT 500,
     schoolID_FK INT,
     studentID_FK INT,
         FOREIGN KEY (schoolID_FK)
@@ -53,23 +53,9 @@ CREATE TABLE Student (
             ON UPDATE CASCADE
 );
 
-CREATE TABLE StudentsInCourses ( --Helpottaa mukavasti tota manytomany linkkaamista , n:m
-    courseID_FK INT,
-    studentID_FK,
-        FOREIGN KEY (courseID_FK)
-            REFERENCES Course (courseID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-
-        FOREIGN KEY (studentID_FK)
-            REFERENCES Student (studentID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
-);
-
 CREATE TABLE Professor (
     staffID INT PRIMARY KEY NOT NULL,
-    phone_number INT,
+    phone_number VARCHAR(20) CHECK (length(phone_number) >= 8), 
     email VARCHAR(50),
     first_name VARCHAR(50),
     last_name VARCHAR(50),
@@ -89,5 +75,3 @@ CREATE TABLE Events (
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
-
---TESTI
