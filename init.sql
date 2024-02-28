@@ -129,7 +129,7 @@ insert into Field (fieldID, guild_name, field_name) values ('028201', 'KeTeK', '
 insert into Field (fieldID, guild_name, field_name) values ('023400', 'KRK', 'Mechanical Engineering');
 insert into Field (fieldID, guild_name, field_name) values ('023359', 'Lateksii', 'Computational Engineaering');
 insert into Field (fieldID, guild_name, field_name) values ('027366', 'Pelletti', 'Environmental Engineering');
-insert into Field (fieldID, guild_name, field_name) values ('029357', 'Sätky', 'Electrical Engineering');
+insert into Field (fieldID, guild_name, field_name) values ('029357', 'Satky', 'Electrical Engineering');
 insert into Field (fieldID, guild_name, field_name) values ('021647', 'Tesseract', 'Technology and Engineering Science');
 insert into Field (fieldID, guild_name, field_name) values ('022632', 'ESN', 'International Exchange');
 

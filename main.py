@@ -46,11 +46,11 @@ def studentCourses():
     SQLlist.clear()
     whatStudent = input("Whos courses do you want to see? ")
     cur.execute("""SELECT S.first_name || ' ' ||  S.last_name AS "'Student'", 
-                GROUP_CONCAT(C.course_name, " ") AS "'Course'" 
+                C.course_name AS "'Course'" 
                     FROM Student S 
                     JOIN CourseInformation CI ON S.studentID = CI.studentID_FK
                     JOIN Course C ON CI.courseID_FK = C.courseID 
-                    WHERE S.studentID=? GROUP BY 'Student'""", (whatStudent,))
+                    WHERE S.studentID=? """, (whatStudent,))
     SQLlist = cur.fetchall()
     print( )
     print(SQLlist[0][0]+":")
@@ -70,18 +70,23 @@ def courseInformation():
     cur.execute("""
     SELECT
         C.course_name AS 'Course',
-        GROUP_CONCAT(S.first_name || ' ' ||  S.last_name, ', ') AS 'Student',
+        S.first_name || ' ' ||  S.last_name AS 'Student',
         P.first_name || ' ' ||  P.last_name AS 'Professor'
             FROM Course C
             JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
             JOIN Student S ON S.studentID = CI.studentID_FK
             LEFT JOIN Professor P ON P.staffID = CI.staffID_FK
-            WHERE C.courseID =?
-            GROUP BY 'C.course_name'""", (whatCourse,))
+            WHERE C.courseID =?""", (whatCourse,))
     SQLlist = cur.fetchall()
-    print("COURSE | STUDENTS | PROFESSOR")
+    print("Course:")
+    print(SQLlist[0][0])
+    print()
+    print("Professor:")
+    print(SQLlist[0][2])
+    print()
+    print("Students:")
     for i in SQLlist:
-        print(str(i[0]) + " | " + i[1] + " | " + i[2])
+        print(str(i[1]))
     return
 
 def professorCourses():
