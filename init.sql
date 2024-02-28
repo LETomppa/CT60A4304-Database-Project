@@ -48,14 +48,8 @@ CREATE TABLE Student (
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     birthday VARCHAR(20),
-    courseID_FK INT,
     schoolID_FK INT,
     fieldID_FK INT,
-        FOREIGN KEY (courseID_FK)
-            REFERENCES Course (courseID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-
         FOREIGN KEY (fieldID_FK)
             REFERENCES Field (fieldID)
             ON DELETE CASCADE
@@ -73,12 +67,7 @@ CREATE TABLE Professor (
     email VARCHAR(50),
     first_name VARCHAR(50),
     last_name VARCHAR(50),
-    birthday VARCHAR(20),
-    courseID_FK INT,
-        FOREIGN KEY (courseID_FK)
-            REFERENCES Course (courseID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
+    birthday VARCHAR(20)
 );
 
 CREATE TABLE Events (
@@ -173,3 +162,5 @@ insert into Events (event_name) values ('The Absurd Antics of the Silly String S
 insert into Events (event_name) values ('The Side-Splitting Slapstick Comedy Hour');
 insert into Events (event_name) values ('The Nutty Noodle Nunchuck Challenge');
 
+INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES (030000, 000010, 019068);
+INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES (030000, 001295, 019068);
