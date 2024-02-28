@@ -41,6 +41,53 @@ def studentCourses():
         print(i)
     return
 
+def addCourse():
+    course_name = input("Enter the course name: ")
+    cur.execute("SELECT * FROM Course;")
+    existingIDs = cur.fetchall()
+    for id in existingIDs:
+        course_id = id[0]
+    course_id += 1
+    cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);", (course_id, course_name,))
+    print("Course " + course_name + " added.")
+
+def modifyCourse():
+    cur.execute("SELECT * FROM Course;")
+    courses = cur.fetchall()
+    for course in courses:
+        print(str(course[0]) + ", " + course[1])
+    print()
+    courseID = input("Enter ID of the course you want to modify: ")
+    course_exists = False
+    for course in courses:
+        if course[0] == int(courseID):
+            course_exists = True
+            break
+    if course_exists:
+        newName = input("Enter new name for course: ")
+        cur.execute("UPDATE Course SET course_name=? WHERE courseID=?", (newName, courseID,))
+        print("Course modified.")
+    else: 
+        print("Course not found.")
+
+def deleteCourse():
+    cur.execute("SELECT * FROM Course;")
+    courses = cur.fetchall()
+    for course in courses:
+        print(str(course[0]) + ", " + course[1])
+    print()
+    courseID = input("Enter ID of the course you want to delete: ")
+    course_exists = False
+    for course in courses:
+        if course[0] == int(courseID):
+            course_exists = True
+            break
+    if course_exists:
+        cur.execute("DELETE FROM Course WHERE courseID=?", (courseID,))
+        print("Course deleted.")
+    else:
+        print("Course not found.")
+
 def main():
     initializeDB()
     userInput = -1
@@ -51,9 +98,9 @@ def main():
         print("3: Print courses students")
         print("4: Print courses that a professor teaches")
         print("5: Print fields events")
-        print("x: Search for one player")
-        print("x: Move matchdate")
-        print("x: Delete player")
+        print("6: Add course")
+        print("7: Modify course")
+        print("8: Delete course")
         print("0: Quit")
         userInput = input("What do you want to do? ")
         print(userInput)
@@ -68,7 +115,11 @@ def main():
         if userInput == "5":
             pass
         if userInput == "6":
-            pass
+            addCourse()
+        if userInput == "7":
+            modifyCourse()
+        if userInput == "8":
+            deleteCourse()
         if userInput == "0":
             print("Ending software...")
     db.close()        
