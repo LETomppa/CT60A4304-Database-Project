@@ -133,18 +133,18 @@ insert into Field (fieldID, guild_name, field_name) values ('029357', 'Satky', '
 insert into Field (fieldID, guild_name, field_name) values ('021647', 'Tesseract', 'Technology and Engineering Science');
 insert into Field (fieldID, guild_name, field_name) values ('022632', 'ESN', 'International Exchange');
 
-insert into Course (courseID, course_name) values ('030000', 'The Art of Underwater Basket Weaving');
-insert into Course (courseID, course_name) values ('030001', 'Advanced Sock Puppetry');
-insert into Course (courseID, course_name) values ('030002', 'Extreme Cheese Tasting 101');
-insert into Course (courseID, course_name) values ('030003', 'Ninja Techniques for Everyday Life');
-insert into Course (courseID, course_name) values ('030004', 'The Science of Wombat Communication');
-insert into Course (courseID, course_name) values ('030005', 'Unicorn Riding for Beginners');
-insert into Course (courseID, course_name) values ('030006', 'Zombie Survival Strategies');
-insert into Course (courseID, course_name) values ('030007', 'The History of Clowns in Modern Society');
-insert into Course (courseID, course_name) values ('030008', 'Alien Abduction Studies');
-insert into Course (courseID, course_name) values ('030009', 'The Philosophy of Bacon');
-insert into Course (courseID, course_name) values ('030010', 'Intro to Time Travel');
-insert into Course (courseID, course_name) values ('030011', 'The Psychology of Internet Memes');
+insert into Course (courseID, course_name) values ('30000', 'The Art of Underwater Basket Weaving');
+insert into Course (courseID, course_name) values ('30001', 'Advanced Sock Puppetry');
+insert into Course (courseID, course_name) values ('30002', 'Extreme Cheese Tasting 101');
+insert into Course (courseID, course_name) values ('30003', 'Ninja Techniques for Everyday Life');
+insert into Course (courseID, course_name) values ('30004', 'The Science of Wombat Communication');
+insert into Course (courseID, course_name) values ('30005', 'Unicorn Riding for Beginners');
+insert into Course (courseID, course_name) values ('30006', 'Zombie Survival Strategies');
+insert into Course (courseID, course_name) values ('30007', 'The History of Clowns in Modern Society');
+insert into Course (courseID, course_name) values ('30008', 'Alien Abduction Studies');
+insert into Course (courseID, course_name) values ('30009', 'The Philosophy of Bacon');
+insert into Course (courseID, course_name) values ('30010', 'Intro to Time Travel');
+insert into Course (courseID, course_name) values ('30011', 'The Psychology of Internet Memes');
 
 insert into Events (event_name) values ('The Great Banana Peel Slip-Off');
 insert into Events (event_name) values ('The Epic Pillow Fight Championship');
@@ -194,3 +194,4 @@ INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '008
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '002029');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030011', '001898', '010145');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030011', '000999');
+
