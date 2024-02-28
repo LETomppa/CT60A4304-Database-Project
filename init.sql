@@ -96,6 +96,7 @@ insert into Field (fieldID, guild_name, field_name) values ('029357', 'Satky', '
 insert into Field (fieldID, guild_name, field_name) values ('021647', 'Tesseract', 'Technology and Engineering Science');
 insert into Field (fieldID, guild_name, field_name) values ('022632', 'ESN', 'International Exchange');
 
+
 insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000010', 'lwhaley0@army.mil', 'Lorrin', 'Whaley', '1990-05-15', '028466');
 insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('001295', 'gledstone1@dyndns.org', 'Gabie', 'Ledstone', '1987-11-30', '023704');
 insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000513', 'tnotley2@marketwatch.com', 'Torie', 'Notley', '2001-08-22', '028466');
@@ -133,18 +134,18 @@ insert into Professor (staffID, phone_number, email, first_name, last_name, birt
 insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012428', '3584715697', 'smicheau8@aol.com', 'Sissie', 'Micheau', '6/7/1966');
 insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('018326', '3584768579', 'csimko9@imdb.com', 'Caitrin', 'Simko', '3/24/1966');
 
-insert into Course (courseID, course_name) values ('30000', 'The Art of Underwater Basket Weaving');
-insert into Course (courseID, course_name) values ('30001', 'Advanced Sock Puppetry');
-insert into Course (courseID, course_name) values ('30002', 'Extreme Cheese Tasting 101');
-insert into Course (courseID, course_name) values ('30003', 'Ninja Techniques for Everyday Life');
-insert into Course (courseID, course_name) values ('30004', 'The Science of Wombat Communication');
-insert into Course (courseID, course_name) values ('30005', 'Unicorn Riding for Beginners');
-insert into Course (courseID, course_name) values ('30006', 'Zombie Survival Strategies');
-insert into Course (courseID, course_name) values ('30007', 'The History of Clowns in Modern Society');
-insert into Course (courseID, course_name) values ('30008', 'Alien Abduction Studies');
-insert into Course (courseID, course_name) values ('30009', 'The Philosophy of Bacon');
-insert into Course (courseID, course_name) values ('30010', 'Intro to Time Travel');
-insert into Course (courseID, course_name) values ('30011', 'The Psychology of Internet Memes');
+insert into Course (courseID, course_name) values ('030000', 'The Art of Underwater Basket Weaving');
+insert into Course (courseID, course_name) values ('030001', 'Advanced Sock Puppetry');
+insert into Course (courseID, course_name) values ('030002', 'Extreme Cheese Tasting 101');
+insert into Course (courseID, course_name) values ('030003', 'Ninja Techniques for Everyday Life');
+insert into Course (courseID, course_name) values ('030004', 'The Science of Wombat Communication');
+insert into Course (courseID, course_name) values ('030005', 'Unicorn Riding for Beginners');
+insert into Course (courseID, course_name) values ('030006', 'Zombie Survival Strategies');
+insert into Course (courseID, course_name) values ('030007', 'The History of Clowns in Modern Society');
+insert into Course (courseID, course_name) values ('030008', 'Alien Abduction Studies');
+insert into Course (courseID, course_name) values ('030009', 'The Philosophy of Bacon');
+insert into Course (courseID, course_name) values ('030010', 'Intro to Time Travel');
+insert into Course (courseID, course_name) values ('030011', 'The Psychology of Internet Memes');
 
 insert into Events (event_name, fieldID_FK) values ('The Great Banana Peel Slip-Off', '028466');
 insert into Events (event_name, fieldID_FK) values ('The Epic Pillow Fight Championship', '028466');
@@ -219,4 +220,3 @@ INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '008
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '002029');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030011', '001898', '010145');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030011', '000999');
-

@@ -173,6 +173,7 @@ def addCourse():
     for id in existingIDs:
         course_id = int(id[0])
     course_id += 1
+    course_id = "0" + str(course_id)
     cur.execute("SELECT * FROM Professor")
     professors = cur.fetchall()
     for professor in professors:
