@@ -62,10 +62,11 @@ def courseInformation():
     cur.execute("SELECT * FROM Course;")
     SQLlist = cur.fetchall()
     for i in SQLlist:
-        print(i)
+        print(str(i[0]) + ", " + i[1])
     print( )
     SQLlist.clear()
-    whatCourse = input("Which courses information do you want to see?")
+    whatCourse = input("Which courses information do you want to see? ")
+    print()
     cur.execute("""
     SELECT
         C.course_name AS 'Course',
@@ -74,12 +75,51 @@ def courseInformation():
             FROM Course C
             JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
             JOIN Student S ON S.studentID = CI.studentID_FK
-            JOIN Professor P ON P.staffID = CI.staffID_FK
+            LEFT JOIN Professor P ON P.staffID = CI.staffID_FK
             WHERE C.courseID =?
             GROUP BY 'C.course_name'""", (whatCourse,))
     SQLlist = cur.fetchall()
+    print("COURSE | STUDENTS | PROFESSOR")
     for i in SQLlist:
-        print(str(i[0]) + ", " + i[1] + "," + i[2])
+        print(str(i[0]) + " | " + i[1] + " | " + i[2])
+    return
+
+def professorCourses():
+    cur.execute("SELECT * FROM Professor;")
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(str(i[0]) + ", " + i[3] + " " + i[4])
+    print( )
+    SQLlist.clear()
+    whatProfessor = input("Which professor? ")
+    cur.execute("""SELECT P.first_name || ' ' ||  P.last_name AS 'Professor', 
+                C.course_name AS 'Course' 
+                    FROM Professor P 
+                    JOIN CourseInformation CI ON P.staffID = CI.staffID_FK
+                    JOIN Course C ON CI.courseID_FK = C.courseID 
+                    WHERE P.staffID=?""", (whatProfessor,))
+    SQLlist = cur.fetchall()
+    print( )
+    print(SQLlist[0][0]+":")
+    for i in SQLlist:
+        print(i[1])
+    return
+
+def fieldEvents():
+    cur.execute("SELECT * FROM Field;")
+    SQLlist = cur.fetchall()
+    for i in SQLlist:
+        print(str(i[0]) + ", " + i[1] + " " + i[2])
+    print( )
+    SQLlist.clear()
+    whatField = input("Enter the ID of the field which events you want to list? ")
+    cur.execute("""SELECT E.event_name AS 'Event',  
+                    FROM Events E
+                    WHERE E.fieldID_FK=?""", (whatField,))
+    SQLlist = cur.fetchall()
+    print( )
+    for i in SQLlist:
+        print(i[1])
     return
 
 def addCourse():
@@ -136,7 +176,7 @@ def main():
         print("\nMenu options:")
         print("1: Print fields students")
         print("2: Print students courses")
-        print("3: Print course information") #TÄÄ ON SE JOINX2
+        print("3: Print course information")
         print("4: Print courses that a professor teaches")
         print("5: Print fields events")
         print("6: Add course")
@@ -152,9 +192,9 @@ def main():
         if userInput == "3":
             courseInformation()
         if userInput == "4":
-            pass
+            professorCourses()
         if userInput == "5":
-            pass
+            fieldEvents()
         if userInput == "6":
             addCourse()
         if userInput == "7":

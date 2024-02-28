@@ -163,4 +163,6 @@ insert into Events (event_name) values ('The Side-Splitting Slapstick Comedy Hou
 insert into Events (event_name) values ('The Nutty Noodle Nunchuck Challenge');
 
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030000', '000010', '019068');
-INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030000', '001295', '019068');
+INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030000', '001295');
+INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030002', '001295', '019068');
+INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030001', '001295', '019068');
