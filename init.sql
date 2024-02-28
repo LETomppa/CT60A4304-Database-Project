@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE School (
     schoolID INT PRIMARY KEY NOT NULL,
     school_name VARCHAR(50)
@@ -87,3 +89,5 @@ CREATE TABLE Events (
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
+
+--TESTI
