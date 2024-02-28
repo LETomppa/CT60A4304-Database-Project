@@ -16,14 +16,28 @@ CREATE TABLE Course (
     course_name VARCHAR(50),
     max_students int DEFAULT 500,
     schoolID_FK INT,
-    studentID_FK INT,
         FOREIGN KEY (schoolID_FK)
             REFERENCES School (SchoolID)
             ON DELETE CASCADE
+            ON UPDATE CASCADE
+);
+
+CREATE TABLE CourseInformation (
+    courseID_FK INT,
+    studentID_FK INT,
+    staffID_FK INT,
+    FOREIGN KEY (courseID_FK)
+            REFERENCES Course (courseID)
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
-        
-        FOREIGN KEY (studentID_FK)
-            REFERENCES Student (StudentID)
+    
+    FOREIGN KEY (studentID_FK)
+            REFERENCES Student (studentID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+
+    FOREIGN KEY (staffID_FK)
+            REFERENCES Professor (staffID)
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
@@ -75,6 +89,7 @@ CREATE TABLE Events (
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
+
 
 --INSERTING DATA
 insert into School (schoolID, school_name) values ('SCHOOL123', 'LUT University');
@@ -157,3 +172,4 @@ insert into Events (event_name) values ('The Goofy Gummy Bear Juggling Contest')
 insert into Events (event_name) values ('The Absurd Antics of the Silly String Show');
 insert into Events (event_name) values ('The Side-Splitting Slapstick Comedy Hour');
 insert into Events (event_name) values ('The Nutty Noodle Nunchuck Challenge');
+
