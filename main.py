@@ -3,18 +3,6 @@ db = sqlite3.connect('students.db')
 cur = db.cursor()
 def initializeDB():
     try:
-        f = open("sqlcommands.sql", "r")
-        commandstring = ""
-        for line in f.readlines():
-            commandstring+=line
-        cur.executescript(commandstring)
-        f.close()
-    except sqlite3.OperationalError:
-        print("Database exists, skip initialization")
-    except:
-        print("No SQL file to be used for initialization") 
-    
-    try:
         f = open("init.sql", "r")
         initcommandstring = ""
         for line in f.readlines():
