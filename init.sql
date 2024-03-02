@@ -232,4 +232,3 @@ INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '008
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '002029');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030011', '001898', '010145');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030011', '000999');
-INSERT INTO CourseInformation (courseID_FK) VALUES ('030012');
