@@ -20,7 +20,7 @@ CREATE TABLE Field (
 );
 
 CREATE TABLE Course (
-    courseID VARCHAR(50) PRIMARY KEY,
+    courseID VARCHAR(50) PRIMARY KEY NOT NULL,
     course_name VARCHAR(50),
     max_students int DEFAULT 500,
     schoolID_FK VARCHAR(50),
