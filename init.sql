@@ -146,6 +146,7 @@ insert into Course (courseID, course_name) values ('030008', 'Alien Abduction St
 insert into Course (courseID, course_name) values ('030009', 'The Philosophy of Bacon');
 insert into Course (courseID, course_name) values ('030010', 'Intro to Time Travel');
 insert into Course (courseID, course_name) values ('030011', 'The Psychology of Internet Memes');
+insert into Course (courseID, course_name) values ('030012', 'TESTI');
 
 insert into Events (event_name, fieldID_FK) values ('The Great Banana Peel Slip-Off', '028466');
 insert into Events (event_name, fieldID_FK) values ('The Epic Pillow Fight Championship', '028466');
@@ -220,3 +221,4 @@ INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '008
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '002029');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030011', '001898', '010145');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030011', '000999');
+INSERT INTO CourseInformation (courseID_FK) VALUES ('030012');
