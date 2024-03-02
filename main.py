@@ -1,23 +1,26 @@
 import sqlite3
 db = sqlite3.connect('students.db')
 cur = db.cursor()
+
+
 def initializeDB():
     try:
         f = open("init.sql", "r")
         initcommandstring = ""
         for line in f.readlines():
-            initcommandstring+=line
+            initcommandstring += line
         cur.executescript(initcommandstring)
     except sqlite3.Error as er:
         print(f"Error during additional initialization: {er.args}")
+
 
 def fieldStudents():
     cur.execute("SELECT * FROM Field;")
     SQLlist = cur.fetchall()
     for i in SQLlist:
         print(str(i[0]) + ", " + i[1] + ", " + i[2])
-    print( )
-    fieldID = input("Enter the ID of the field: ")
+    print()
+    fieldID = int(input("Enter the ID of the field: "))
     field_exists = False
     for field in SQLlist:
         try:
@@ -28,7 +31,8 @@ def fieldStudents():
             ValueError()
     if field_exists:
         SQLlist.clear()
-        cur.execute("SELECT * FROM Student WHERE Student.fieldID_FK=?;", (fieldID,))
+        cur.execute(
+            "SELECT * FROM Student WHERE Student.fieldID_FK=?;", (fieldID,))
         SQLlist = cur.fetchall()
         for i in SQLlist:
             print(str(i[2]) + ", " + i[3] + ", " + i[1] + ", " + i[4])
@@ -36,12 +40,13 @@ def fieldStudents():
         print("Field not found.")
     return
 
+
 def studentCourses():
     cur.execute("SELECT * FROM Student;")
     SQLlist = cur.fetchall()
     for i in SQLlist:
         print(str(i[0]) + ", " + i[2] + " " + i[3])
-    print( )
+    print()
     studentID = input("Enter the ID of the student: ")
     student_exists = False
     for student in SQLlist:
@@ -60,7 +65,7 @@ def studentCourses():
                         JOIN Course C ON CI.courseID_FK = C.courseID 
                         WHERE S.studentID=? """, (studentID,))
         SQLlist = cur.fetchall()
-        print( )
+        print()
         print(SQLlist[0][0]+":")
         for i in SQLlist:
             print(i[1])
@@ -68,12 +73,13 @@ def studentCourses():
         print("Student not found.")
     return
 
+
 def courseInformation():
     cur.execute("SELECT * FROM Course;")
     SQLlist = cur.fetchall()
     for i in SQLlist:
         print(str(i[0]) + ", " + i[1])
-    print( )
+    print()
     courseID = input("Enter the ID of the course: ")
     course_exists = False
     for course in SQLlist:
@@ -109,12 +115,13 @@ def courseInformation():
         print("Course not found.")
     return
 
+
 def professorCourses():
     cur.execute("SELECT * FROM Professor;")
     SQLlist = cur.fetchall()
     for i in SQLlist:
         print(str(i[0]) + ", " + i[3] + " " + i[4])
-    print( )
+    print()
     professorID = input("Enter the ID of the professor: ")
     professor_exists = False
     for professor in SQLlist:
@@ -133,13 +140,14 @@ def professorCourses():
                         JOIN Course C ON CI.courseID_FK = C.courseID 
                         WHERE P.staffID=?""", (professorID,))
         SQLlist = cur.fetchall()
-        print( )
+        print()
         print(SQLlist[0][0]+":")
         for i in SQLlist:
             print(i[1])
     else:
         print("Professor not found.")
     return
+
 
 def fieldEvents():
     cur.execute("SELECT * FROM Field;")
@@ -162,12 +170,13 @@ def fieldEvents():
                         FROM Events E
                         WHERE E.fieldID_FK=?""", (fieldID,))
         SQLlist = cur.fetchall()
-        print( )
+        print()
         for i in SQLlist:
             print(i[0])
     else:
         print("Field not found.")
     return
+
 
 def addCourse():
     course_name = input("Enter the course name: ")
@@ -181,7 +190,8 @@ def addCourse():
     professors = cur.fetchall()
     for professor in professors:
         print(professor[0] + ", " + professor[3] + " " + professor[4])
-    professorID = input("Enter the ID of the professor you want to assign to the course: ")
+    professorID = input(
+        "Enter the ID of the professor you want to assign to the course: ")
     professor_found = False
     for professor in professors:
         if int(professor[0]) == int(professorID):
@@ -191,19 +201,23 @@ def addCourse():
     students = cur.fetchall()
     for student in students:
         print(student[0] + ", " + student[2] + " " + student[3])
-    studentID = input("Enter the ID of the student you want to add to the course: ")
+    studentID = input(
+        "Enter the ID of the student you want to add to the course: ")
     student_found = False
     for student in students:
         if int(student[0]) == int(studentID):
             student_found = True
     if student_found and professor_found:
-        cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);", (course_id, course_name,))
+        cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);",
+                    (course_id, course_name,))
         print("Course " + course_name + " added.")
-        cur.execute("INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES (?, ?, ?);", (course_id, studentID, professorID,))
+        cur.execute("INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES (?, ?, ?);",
+                    (course_id, studentID, professorID,))
         print()
         print("Data inserted.")
     else:
         print("Student or professor not found. Course not added.")
+
 
 def modifyCourse():
     cur.execute("SELECT * FROM Course;")
@@ -219,10 +233,12 @@ def modifyCourse():
             break
     if course_exists:
         newName = input("Enter new name for course: ")
-        cur.execute("UPDATE Course SET course_name=? WHERE courseID=?", (newName, courseID,))
+        cur.execute(
+            "UPDATE Course SET course_name=? WHERE courseID=?", (newName, courseID,))
         print("Course modified.")
-    else: 
+    else:
         print("Course not found.")
+
 
 def deleteCourse():
     cur.execute("SELECT * FROM Course;")
@@ -242,10 +258,11 @@ def deleteCourse():
     else:
         print("Course not found.")
 
+
 def main():
     initializeDB()
     userInput = -1
-    while(userInput != "0"):
+    while (userInput != "0"):
         print("\nMenu options:")
         print("1: Print fields students")
         print("2: Print students courses")
@@ -260,23 +277,26 @@ def main():
         print(userInput)
         if userInput == "1":
             fieldStudents()
-        if userInput == "2":
+        elif userInput == "2":
             studentCourses()
-        if userInput == "3":
+        elif userInput == "3":
             courseInformation()
-        if userInput == "4":
+        elif userInput == "4":
             professorCourses()
-        if userInput == "5":
+        elif userInput == "5":
             fieldEvents()
-        if userInput == "6":
+        elif userInput == "6":
             addCourse()
-        if userInput == "7":
+        elif userInput == "7":
             modifyCourse()
-        if userInput == "8":
+        elif userInput == "8":
             deleteCourse()
-        if userInput == "0":
+        elif userInput == "0":
             print("Ending software...")
-    db.close()        
+        else:
+            print("Unkown command, try again.")
+    db.close()
     return
+
 
 main()
