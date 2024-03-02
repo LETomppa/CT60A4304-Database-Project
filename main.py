@@ -5,18 +5,6 @@ cur = db.cursor()
 
 def initializeDB():
     try:
-        f = open("sqlcommands.sql", "r")
-        commandstring = ""
-        for line in f.readlines():
-            commandstring += line
-        cur.executescript(commandstring)
-        f.close()
-    except sqlite3.OperationalError:
-        print("Database exists, skip initialization")
-    except:
-        print("No SQL file to be used for initialization")
-
-    try:
         f = open("init.sql", "r")
         initcommandstring = ""
         for line in f.readlines():
@@ -35,9 +23,12 @@ def fieldStudents():
     fieldID = int(input("Enter the ID of the field: "))
     field_exists = False
     for field in SQLlist:
-        if int(field[0]) == int(fieldID):
-            field_exists = True
-            break
+        try:
+            if int(field[0]) == int(fieldID):
+                field_exists = True
+                break
+        except:
+            ValueError()
     if field_exists:
         SQLlist.clear()
         cur.execute(
@@ -59,9 +50,12 @@ def studentCourses():
     studentID = input("Enter the ID of the student: ")
     student_exists = False
     for student in SQLlist:
-        if int(student[0]) == int(studentID):
-            student_exists = True
-            break
+        try:
+            if int(student[0]) == int(studentID):
+                student_exists = True
+                break
+        except:
+            ValueError()
     if student_exists:
         SQLlist.clear()
         cur.execute("""SELECT S.first_name || ' ' ||  S.last_name AS "'Student'", 
@@ -89,9 +83,12 @@ def courseInformation():
     courseID = input("Enter the ID of the course: ")
     course_exists = False
     for course in SQLlist:
-        if int(course[0]) == int(courseID):
-            course_exists = True
-            break
+        try:
+            if int(course[0]) == int(courseID):
+                course_exists = True
+                break
+        except: 
+            ValueError
     if course_exists:
         SQLlist.clear()
         cur.execute("""
@@ -101,7 +98,7 @@ def courseInformation():
             P.first_name || ' ' ||  P.last_name AS 'Professor'
                 FROM Course C
                 JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
-                JOIN Student S ON S.studentID = CI.studentID_FK
+                LEFT JOIN Student S ON S.studentID = CI.studentID_FK
                 LEFT JOIN Professor P ON P.staffID = CI.staffID_FK
                 WHERE C.courseID =?""", (courseID,))
         SQLlist = cur.fetchall()
@@ -128,9 +125,12 @@ def professorCourses():
     professorID = input("Enter the ID of the professor: ")
     professor_exists = False
     for professor in SQLlist:
-        if int(professor[0]) == int(professorID):
-            professor_exists = True
-            break
+        try:
+            if int(professor[0]) == int(professorID):
+                professor_exists = True
+                break
+        except:
+            ValueError
     if professor_exists:
         SQLlist.clear()
         cur.execute("""SELECT P.first_name || ' ' ||  P.last_name AS 'Professor', 
@@ -158,9 +158,12 @@ def fieldEvents():
     fieldID = input("Enter the ID of the field: ")
     field_exists = False
     for field in SQLlist:
-        if int(field[0]) == int(fieldID):
-            field_exists = True
-            break
+        try:
+            if int(field[0]) == int(fieldID):
+                field_exists = True
+                break
+        except:
+            ValueError
     if field_exists:
         SQLlist.clear()
         cur.execute("""SELECT E.event_name AS 'Event'  
