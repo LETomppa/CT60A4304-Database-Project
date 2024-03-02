@@ -97,7 +97,7 @@ def courseInformation():
             S.first_name || ' ' ||  S.last_name AS 'Student',
             P.first_name || ' ' ||  P.last_name AS 'Professor'
                 FROM Course C
-                JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
+                LEFT JOIN CourseInformation CI ON CI.courseID_FK = C.courseID
                 LEFT JOIN Student S ON S.studentID = CI.studentID_FK
                 LEFT JOIN Professor P ON P.staffID = CI.staffID_FK
                 WHERE C.courseID =?""", (courseID,))
@@ -191,10 +191,10 @@ def addCourse():
     for professor in professors:
         print(professor[0] + ", " + professor[3] + " " + professor[4])
     professorID = input(
-        "Enter the ID of the professor you want to assign to the course: ")
+        "Enter the ID of the professor you want to assign to the course or leave empty if you do not want to assign a professor: ")
     professor_found = False
     for professor in professors:
-        if int(professor[0]) == int(professorID):
+        if professor[0] == professorID:
             professor_found = True
     print()
     cur.execute("SELECT * FROM Student")
@@ -202,12 +202,12 @@ def addCourse():
     for student in students:
         print(student[0] + ", " + student[2] + " " + student[3])
     studentID = input(
-        "Enter the ID of the student you want to add to the course: ")
+        "Enter the ID of the student you want to add to the course or leave empty if you do not want to add a student: ")
     student_found = False
     for student in students:
-        if int(student[0]) == int(studentID):
+        if student[0] == studentID:
             student_found = True
-    if student_found and professor_found:
+    if student_found == True and professor_found == True:
         cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);",
                     (course_id, course_name,))
         print("Course " + course_name + " added.")
@@ -215,8 +215,30 @@ def addCourse():
                     (course_id, studentID, professorID,))
         print()
         print("Data inserted.")
+    
+    elif student_found == False and professor_found == True:
+        cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);",
+                    (course_id, course_name,))
+        print("Course " + course_name + " added.")
+        cur.execute("INSERT INTO CourseInformation (courseID_FK , staffID_FK) VALUES (?, ?);",
+                    (course_id, professorID,))
+        print()
+        print("Data inserted.")
+
+    elif student_found == True and professor_found == False:
+        cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);",
+                    (course_id, course_name,))
+        print("Course " + course_name + " added.")
+        cur.execute("INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES (?, ?);",
+                    (course_id, studentID,))
+        print()
+        print("Data inserted.")
+
     else:
-        print("Student or professor not found. Course not added.")
+        cur.execute("INSERT INTO Course (courseID, course_name) VALUES (?, ?);",
+                    (course_id, course_name,))
+        print()
+        print("Course " + course_name + " added.")
 
 
 def modifyCourse():
@@ -228,7 +250,7 @@ def modifyCourse():
     courseID = input("Enter ID of the course: ")
     course_exists = False
     for course in courses:
-        if int(course[0]) == int(courseID):
+        if course[0] == courseID:
             course_exists = True
             break
     if course_exists:
@@ -249,7 +271,7 @@ def deleteCourse():
     courseID = input("Enter ID of the course: ")
     course_exists = False
     for course in courses:
-        if int(course[0]) == int(courseID):
+        if course[0] == courseID:
             course_exists = True
             break
     if course_exists:

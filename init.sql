@@ -20,7 +20,7 @@ CREATE TABLE Field (
 );
 
 CREATE TABLE Course (
-    courseID VARCHAR(50) PRIMARY KEY,
+    courseID VARCHAR(50) PRIMARY KEY NOT NULL,
     course_name VARCHAR(50),
     max_students int DEFAULT 500,
     schoolID_FK VARCHAR(50),
@@ -232,4 +232,3 @@ INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '008
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030010', '002029');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK, staffID_FK) VALUES ('030011', '001898', '010145');
 INSERT INTO CourseInformation (courseID_FK ,studentID_FK) VALUES ('030011', '000999');
-INSERT INTO CourseInformation (courseID_FK) VALUES ('030012');
