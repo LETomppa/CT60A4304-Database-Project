@@ -2,13 +2,21 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE School (
     schoolID VARCHAR(50) PRIMARY KEY NOT NULL UNIQUE,
-    school_name VARCHAR(50)
+    school_name VARCHAR(50),
+    year_founded INT,
+    school_location VARCHAR(50),
+    max_students INT
 );
 
 CREATE TABLE Field (
     fieldID VARCHAR(50) PRIMARY KEY NOT NULL,
     guild_name VARCHAR(50),
-    field_name VARCHAR(50)
+    field_name VARCHAR(50),
+    schoolID_FK VARCHAR(50),
+        FOREIGN KEY (schoolID_FK)
+            REFERENCES School (SchoolID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
 
 CREATE TABLE Course (
@@ -81,47 +89,51 @@ CREATE TABLE Events (
 
 
 --INSERTING DATA
-insert into School (schoolID, school_name) values ('SCHOOL123', 'LUT University');
+insert into School (schoolID, school_name, year_founded, school_location, max_students) values ('SCHOOL123', 'LUT University', '1969', 'Lappeenranta', '8000');
+insert into School (schoolID, school_name, year_founded, school_location, max_students) values ('SCHOOL124', 'Helsinki University', '1640', 'Helsinki', '35000');
+insert into School (schoolID, school_name, year_founded, school_location, max_students) values ('SCHOOL125', 'Laurea University of Applied Sciences', '1991', 'Hyvinkaa', '10000');
+insert into School (schoolID, school_name, year_founded, school_location, max_students) values ('SCHOOL126', 'Aalto University', '2010', 'Espoo', '15000');
+insert into School (schoolID, school_name, year_founded, school_location, max_students) values ('SCHOOL127', 'Tampere University', '2019', 'Tampere', '20000');
 
-insert into Field (fieldID, guild_name, field_name) values ('028466', 'Aether', 'International Programs');
-insert into Field (fieldID, guild_name, field_name) values ('022577', 'Armatuuri', 'Energy Technology');
-insert into Field (fieldID, guild_name, field_name) values ('022732', 'Cluster', 'Computer Science');
-insert into Field (fieldID, guild_name, field_name) values ('028933', 'Enklaavi', 'Business');
-insert into Field (fieldID, guild_name, field_name) values ('023704', 'Kaplaaki', 'Industrial Engineering and Management');
-insert into Field (fieldID, guild_name, field_name) values ('028201', 'KeTeK', 'Chemical Engineering');
-insert into Field (fieldID, guild_name, field_name) values ('023400', 'KRK', 'Mechanical Engineering');
-insert into Field (fieldID, guild_name, field_name) values ('023359', 'Lateksii', 'Computational Engineaering');
-insert into Field (fieldID, guild_name, field_name) values ('027366', 'Pelletti', 'Environmental Engineering');
-insert into Field (fieldID, guild_name, field_name) values ('029357', 'Satky', 'Electrical Engineering');
-insert into Field (fieldID, guild_name, field_name) values ('021647', 'Tesseract', 'Technology and Engineering Science');
-insert into Field (fieldID, guild_name, field_name) values ('022632', 'ESN', 'International Exchange');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('028466', 'Aether', 'International Programs', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('022577', 'Armatuuri', 'Energy Technology', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('022732', 'Cluster', 'Computer Science', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('028933', 'Enklaavi', 'Business', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('023704', 'Kaplaaki', 'Industrial Engineering and Management', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('028201', 'KeTeK', 'Chemical Engineering', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('023400', 'KRK', 'Mechanical Engineering', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('023359', 'Lateksii', 'Computational Engineaering', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('027366', 'Pelletti', 'Environmental Engineering', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('029357', 'Satky', 'Electrical Engineering', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('021647', 'Tesseract', 'Technology and Engineering Science', 'SCHOOL123');
+insert into Field (fieldID, guild_name, field_name, schoolID_FK) values ('022632', 'ESN', 'International Exchange', 'SCHOOL123');
 
 
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000010', 'lwhaley0@army.mil', 'Lorrin', 'Whaley', '1990-05-15', '028466');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('001295', 'gledstone1@dyndns.org', 'Gabie', 'Ledstone', '1987-11-30', '023704');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000513', 'tnotley2@marketwatch.com', 'Torie', 'Notley', '2001-08-22', '028466');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000671', 'lcornewell3@intel.com', 'Leigh', 'Cornewell', '1975-03-10', '028466');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('006747', 'mrames4@wordpress.com', 'Mac', 'Rames', '1999-09-05', '022577');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('005781', 'nsanches5@china.com.cn', 'Nissy', 'Sanches', '1990-05-15', '022577');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('001906', 'fsprade6@dailymotion.com', 'Ferguson', 'Sprade', '1987-11-30', '022732');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('001160', 'rsnowsill7@sphinn.com', 'Ross', 'Snowsill', '2001-08-22', '023704');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('006065', 'lbelone8@gov.uk', 'Leandra', 'Belone', '1975-03-10', '022732');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('009356', 'cgreenhill9@dedecms.com', 'Cindi', 'Greenhill', '1999-09-05', '028933');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('008413', 'dgrubeya@gravatar.com', 'Daisie', 'Grubey', '1990-05-15', '028933');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('006150', 'hmorpheyb@constantcontact.com', 'Hussein', 'Morphey', '1987-11-30', '028201');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('004622', 'pbarrandc@flavors.me', 'Piggy', 'Barrand', '2001-08-22', '028201');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('005546', 'enuccitellid@go.com', 'Esdras', 'Nuccitelli', '1975-03-10', '023400');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000784', 'gbergstrame@webeden.co.uk', 'Gloria', 'Bergstram', '1999-09-05', '023400');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('005383', 'rbondsf@behance.net', 'Ryan', 'Bonds', '1990-05-15', '023400');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000999', 'khelderg@booking.com', 'Kippie', 'Helder', '1987-11-30', '023359');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('007863', 'jemesh@google.co.uk', 'Jessalyn', 'Emes', '2001-08-22', '023359');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('000553', 'tpashbeei@virginia.edu', 'Twila', 'Pashbee', '1975-03-10', '023359');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('005587', 'smccuskerj@i2i.jp', 'Skipton', 'McCusker', '1999-09-05', '027366');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('005688', 'corrickk@squidoo.com', 'Coriss', 'Orrick', '1990-05-15', '027366');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('003589', 'mpilll@about.com', 'Miquela', 'Pill', '1987-11-30', '029357');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('008809', 'aheightonm@cbsnews.com', 'Austen', 'Heighton', '2001-08-22', '021647');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('002029', 'iseebrightn@tripadvisor.com', 'Inga', 'Seebright', '1975-03-10', '021647');
-insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK) values ('001898', 'maleksico@foxnews.com', 'Micheil', 'Aleksic', '1999-09-05', '022632');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('000010', 'lwhaley0@army.mil', 'Lorrin', 'Whaley', '1990-05-15', '028466', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('001295', 'gledstone1@dyndns.org', 'Gabie', 'Ledstone', '1987-11-30', '023704', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('000513', 'tnotley2@marketwatch.com', 'Torie', 'Notley', '2001-08-22', '028466', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('000671', 'lcornewell3@intel.com', 'Leigh', 'Cornewell', '1975-03-10', '028466', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('006747', 'mrames4@wordpress.com', 'Mac', 'Rames', '1999-09-05', '022577', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('005781', 'nsanches5@china.com.cn', 'Nissy', 'Sanches', '1990-05-15', '022577', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('001906', 'fsprade6@dailymotion.com', 'Ferguson', 'Sprade', '1987-11-30', '022732', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('001160', 'rsnowsill7@sphinn.com', 'Ross', 'Snowsill', '2001-08-22', '023704', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('006065', 'lbelone8@gov.uk', 'Leandra', 'Belone', '1975-03-10', '022732', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('009356', 'cgreenhill9@dedecms.com', 'Cindi', 'Greenhill', '1999-09-05', '028933', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('008413', 'dgrubeya@gravatar.com', 'Daisie', 'Grubey', '1990-05-15', '028933', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('006150', 'hmorpheyb@constantcontact.com', 'Hussein', 'Morphey', '1987-11-30', '028201', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('004622', 'pbarrandc@flavors.me', 'Piggy', 'Barrand', '2001-08-22', '028201', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('005546', 'enuccitellid@go.com', 'Esdras', 'Nuccitelli', '1975-03-10', '023400', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('000784', 'gbergstrame@webeden.co.uk', 'Gloria', 'Bergstram', '1999-09-05', '023400', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('005383', 'rbondsf@behance.net', 'Ryan', 'Bonds', '1990-05-15', '023400', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('000999', 'khelderg@booking.com', 'Kippie', 'Helder', '1987-11-30', '023359', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('007863', 'jemesh@google.co.uk', 'Jessalyn', 'Emes', '2001-08-22', '023359', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('000553', 'tpashbeei@virginia.edu', 'Twila', 'Pashbee', '1975-03-10', '023359', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('005587', 'smccuskerj@i2i.jp', 'Skipton', 'McCusker', '1999-09-05', '027366', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('005688', 'corrickk@squidoo.com', 'Coriss', 'Orrick', '1990-05-15', '027366', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('003589', 'mpilll@about.com', 'Miquela', 'Pill', '1987-11-30', '029357', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('008809', 'aheightonm@cbsnews.com', 'Austen', 'Heighton', '2001-08-22', '021647', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('002029', 'iseebrightn@tripadvisor.com', 'Inga', 'Seebright', '1975-03-10', '021647', 'SCHOOL123');
+insert into Student (studentID, email, first_name, last_name, birthday, fieldID_FK, schoolID_FK) values ('001898', 'maleksico@foxnews.com', 'Micheil', 'Aleksic', '1999-09-05', '022632', 'SCHOOL123');
 
 insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('019068', '3585926932', 'fberthomier0@tiny.cc', 'Fayth', 'Berthomier', '1/6/1965');
 insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('010145', '3588363311', 'dblazey1@discovery.com', 'Diandra', 'Blazey', '3/30/1970');
@@ -134,18 +146,18 @@ insert into Professor (staffID, phone_number, email, first_name, last_name, birt
 insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('012428', '3584715697', 'smicheau8@aol.com', 'Sissie', 'Micheau', '6/7/1966');
 insert into Professor (staffID, phone_number, email, first_name, last_name, birthday) values ('018326', '3584768579', 'csimko9@imdb.com', 'Caitrin', 'Simko', '3/24/1966');
 
-insert into Course (courseID, course_name) values ('030000', 'The Art of Underwater Basket Weaving');
-insert into Course (courseID, course_name) values ('030001', 'Advanced Sock Puppetry');
-insert into Course (courseID, course_name) values ('030002', 'Extreme Cheese Tasting 101');
-insert into Course (courseID, course_name) values ('030003', 'Ninja Techniques for Everyday Life');
-insert into Course (courseID, course_name) values ('030004', 'The Science of Wombat Communication');
-insert into Course (courseID, course_name) values ('030005', 'Unicorn Riding for Beginners');
-insert into Course (courseID, course_name) values ('030006', 'Zombie Survival Strategies');
-insert into Course (courseID, course_name) values ('030007', 'The History of Clowns in Modern Society');
-insert into Course (courseID, course_name) values ('030008', 'Alien Abduction Studies');
-insert into Course (courseID, course_name) values ('030009', 'The Philosophy of Bacon');
-insert into Course (courseID, course_name) values ('030010', 'Intro to Time Travel');
-insert into Course (courseID, course_name) values ('030011', 'The Psychology of Internet Memes');
+insert into Course (courseID, course_name, schoolID_FK) values ('030000', 'The Art of Underwater Basket Weaving', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030001', 'Advanced Sock Puppetry', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030002', 'Extreme Cheese Tasting 101', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030003', 'Ninja Techniques for Everyday Life', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030004', 'The Science of Wombat Communication', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030005', 'Unicorn Riding for Beginners', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030006', 'Zombie Survival Strategies', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030007', 'The History of Clowns in Modern Society', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030008', 'Alien Abduction Studies', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030009', 'The Philosophy of Bacon', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030010', 'Intro to Time Travel', 'SCHOOL123');
+insert into Course (courseID, course_name, schoolID_FK) values ('030011', 'The Psychology of Internet Memes', 'SCHOOL123');
 
 insert into Events (event_name, fieldID_FK) values ('The Great Banana Peel Slip-Off', '028466');
 insert into Events (event_name, fieldID_FK) values ('The Epic Pillow Fight Championship', '028466');
