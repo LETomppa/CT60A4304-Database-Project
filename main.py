@@ -20,7 +20,7 @@ def fieldStudents():
     for i in SQLlist:
         print(str(i[0]) + ", " + i[1] + ", " + i[2])
     print()
-    fieldID = int(input("Enter the ID of the field: "))
+    fieldID = input("Enter the ID of the field: ")
     field_exists = False
     for field in SQLlist:
         try:
